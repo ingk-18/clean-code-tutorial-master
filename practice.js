@@ -1,54 +1,48 @@
-Emails = {
-
-  1 : '千代田',
-  2 : '中央',
-  3 : '港'
-};
-
-
-console.log(Emails[1]);
-
-function getUserName(user) {
-  if (user === undefined) return '名無し';
-  return user.name ?? 'なし';
-}
-
-console.log(getUserName('hoge'));
-
-function isPrimeNumber(n) {
-  if (n === 1) return false;
-
-  for (let i = 2; i < n; i++) {
-    if (n % i === 0) return false;
+class Lesson {
+  constructor(students = [], teacher) {
+    this.students = students;
+    this.teacherName = teacher.name;
+    this.teacherSubject = teacher.subject;
   }
 
-  return true;
-}
+  start() {
+    console.log(`${this.teacherName}:Let's start ${this.teacherSubject}`);
 
-for (let i = 1; i <= 30; i++) {
-  console.log(i, isPrimeNumber(i));
-}
-
-function isCorrectInput(member) {
-  if (member.id === undefined) {
-    console.error("idがありません");
-    return false;
-  }
-
-  if (member.name === undefined) {
-    console.error("名前が入力されていません");
-    return false;
-  }
-
-  if (member.age) {
-    if (member.email) {
-      return true;
-    } else {
-      console.error("メールアドレスが入力されていません");
-      return false;
+    for (const student of this.students) {
+      console.log(`Hello, Mr.${this.teacherName}! I'm ${student.name}.`);
     }
-  } else {
-    console.error("年齢が入力されていません");
-    return false;
+  }
+
+  setTeacher(teacherName, teacherSubject) {
+    this.teacherName = teacherName;
+    this.teacherSubject = teacherSubject;
   }
 }
+
+class Student {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+const students = [
+  new Student("Taro 1"),
+  new Student("Taro 2"),
+  new Student("Taro 3"),
+];
+
+const teacher = { name: "Teacher 1", subject: "English" };
+const lesson = new Lesson(students, teacher);
+lesson.start();
+lesson.setTeacher("Teacher 2", "Math");
+lesson.start();
+
+// Teacher 1:Let's start English
+// Hello, Mr.Teacher 1! I'm Taro 1.
+// Hello, Mr.Teacher 1! I'm Taro 2.
+// Hello, Mr.Teacher 1! I'm Taro 3.
+// Teacher 2:Let's start Math
+// Hello, Mr.Teacher 2! I'm Taro 1.
+// Hello, Mr.Teacher 2! I'm Taro 2.
+// Hello, Mr.Teacher 2! I'm Taro 3.
+```
